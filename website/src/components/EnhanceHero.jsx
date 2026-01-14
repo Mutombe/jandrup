@@ -241,6 +241,7 @@ const EnhancedHero = () => {
                 <img
                   src="/jandrup-1.png"
                   alt="Main construction project"
+                  loading='eager'
                   className="w-full h-full object-cover"
                 />
                 {/* Floating Badge on Image */}
@@ -271,6 +272,7 @@ const EnhancedHero = () => {
                 <img
                   src="/16.jpg"
                   alt="Construction detail"
+                  loading='eager'
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-brand-500/20 mix-blend-overlay" />
@@ -288,6 +290,7 @@ const EnhancedHero = () => {
                 <img
                   src="/19.jpg"
                   alt="Building progress"
+                  loading='eager'
                   className="w-full h-full object-cover"
                 />
               </motion.div>
