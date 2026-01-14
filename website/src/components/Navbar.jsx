@@ -49,50 +49,56 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-gradient-to-r from-brand-800 to-brand-700 text-white py-2 pacaembu-font">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-6 text-sm">
-            <a 
-              href={`tel:${companyInfo.phone}`} 
-              className="flex items-center gap-2 hover:text-brand-200 transition-colors"
-            >
-              <Phone size={14} />
-              <span>{companyInfo.phone}</span>
-            </a>
-            <a 
-              href={`mailto:${companyInfo.email}`} 
-              className="flex items-center gap-2 hover:text-brand-200 transition-colors"
-            >
-              <Mail size={14} />
-              <span>{companyInfo.email}</span>
-            </a>
+      {/* Fixed Header Container */}
+      <div className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ${
+        isScrolled ? 'shadow-lg shadow-black/5' : ''
+      }`}>
+        {/* Top Bar - Hidden on scroll for more space */}
+        <motion.div 
+          className={`hidden lg:block bg-gradient-to-r from-brand-800 to-brand-700 text-white pacaembu-font transition-all duration-300 overflow-hidden ${
+            isScrolled ? 'h-0 py-0' : 'h-auto py-2'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div className="flex items-center gap-6 text-sm">
+              <a 
+                href={`tel:${companyInfo.phone}`} 
+                className="flex items-center gap-2 hover:text-brand-200 transition-colors"
+              >
+                <Phone size={14} />
+                <span>{companyInfo.phone}</span>
+              </a>
+              <a 
+                href={`mailto:${companyInfo.email}`} 
+                className="flex items-center gap-2 hover:text-brand-200 transition-colors"
+              >
+                <Mail size={14} />
+                <span>{companyInfo.email}</span>
+              </a>
+            </div>
+            <div className="text-sm font-medium">
+              {companyInfo.workingHours.weekdays}
+            </div>
           </div>
-          <div className="text-sm font-medium">
-            {companyInfo.workingHours.weekdays}
-          </div>
-        </div>
-      </div>
+        </motion.div>
 
-      {/* Main Navigation */}
-      <motion.header
-        className={`sticky top-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-lg shadow-lg shadow-black/5' 
-            : 'bg-white'
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 pacaembu-font">
-          <div className="flex justify-between items-center h-20">
+        {/* Main Navigation */}
+        <motion.header
+          className={`bg-white transition-all duration-300`}
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <nav className="max-w-7xl mx-auto px-4 sm:px-6 pacaembu-font">
+            <div className={`flex justify-between items-center transition-all duration-300 ${
+              isScrolled ? 'h-16' : 'h-16 lg:h-[72px]'
+            }`}>
             {/* Logo */}
             <Link to="/" className="relative z-10 flex items-center gap-3">
               <motion.img
                 src="/logo.png"
                 alt="Jandrup Group"
-                className="h-14 w-auto"
+                className={`w-auto transition-all duration-300 ${isScrolled ? 'h-10' : 'h-10 lg:h-12'}`}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               />
@@ -176,7 +182,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="lg:hidden relative z-[10001] p-2 rounded-lg hover:bg-gray-100 transition-colors"
               aria-label="Toggle menu"
             >
               <AnimatePresence mode="wait">
@@ -214,7 +220,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-40"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-[10000]"
               onClick={() => setIsOpen(false)}
             >
               <motion.div
@@ -225,7 +231,7 @@ const Navbar = () => {
                 className="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex flex-col h-full pt-24 pb-8 px-6">
+                <div className="flex flex-col h-full pt-20 pb-8 px-6">
                   <div className="flex-1 space-y-1">
                     {navLinks.map((link, index) => (
                       <motion.div
@@ -287,6 +293,10 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </motion.header>
+      </div>
+
+      {/* Spacer to account for fixed header */}
+      <div className="h-16 lg:h-[104px]" />
     </>
   );
 };
