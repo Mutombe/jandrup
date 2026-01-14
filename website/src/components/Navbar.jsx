@@ -98,7 +98,7 @@ const Navbar = () => {
               <motion.img
                 src="/logo.png"
                 alt="Jandrup Group"
-                className={`w-auto transition-all duration-300 ${isScrolled ? 'h-10' : 'h-10 lg:h-12'}`}
+                className={`w-auto transition-all duration-300 ${isScrolled ? 'h-15' : 'h-15 lg:h-15'}`}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               />
